@@ -102,6 +102,6 @@ func main(){
 
 	router.GET("/connectDb",connectToYourDB) // just create and fill your .env
 
-	router.Run("localhost:8000")
+	router.Run("localhost:800")
 }
 
