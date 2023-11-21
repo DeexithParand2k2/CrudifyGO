@@ -10,6 +10,7 @@ import (
 	godot "github.com/joho/godotenv"
 	_ "github.com/go-sql-driver/mysql"
 	"database/sql"
+	"log"
 )
 
 // from env
@@ -67,40 +68,58 @@ func ExtractEnv() (DbConfig,error){
 	return dbconfig,nil
 }
 
+// @ query key : "databasename"
+func PingYourDb(c *gin.Context){
 
-func connectToYourDB(c *gin.Context){
+	queryDbName := c.Query("databasename")
+
+	if queryDbName==""{
+		log.Print("Error: Query doesn't contain any database name")
+		c.JSON(http.StatusBadRequest, gin.H{"Query Error": "Query doesn't contain any database name"})
+		return
+	}
 
 	// load .env file
 	err := LoadEnv()
 	if err!=nil{
-		fmt.Println("Error loading env file")
-		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
+		log.Print("Error: error loading env file")
+		c.JSON(http.StatusInternalServerError, gin.H{"Loading Error": err.Error()})
 		return 
 	}
 
 	// get .env file data
 	envdata,err := ExtractEnv()
 	if err!=nil{
-		fmt.Println("Error extracting data from env file")	
-		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
+		log.Print("Error: error extracting data from env file")
+		c.JSON(http.StatusInternalServerError, gin.H{"Extraction Error": err.Error()})
+		return 
 	}
-
 
 	// extracted data from .env file - now connectdb
-	var connectionString string = envdata.Username+":"+envdata.Password+"@"+envdata.Network+"("+envdata.Host+":"+envdata.DatabasePort+")/"+envdata.DatabaseName
-	_, err = sql.Open("mysql", connectionString)
+	var connectionString string = envdata.Username+":"+envdata.Password+"@"+envdata.Network+"("+envdata.Host+":"+envdata.DatabasePort+")/"+queryDbName
+	db, err := sql.Open("mysql", connectionString)
 	if err != nil {
-		fmt.Println("Connection to db error")
+		log.Print("Error: error on connection to db")
 		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
+		return 
+	}
+	defer db.Close()
+
+	if err = db.Ping(); err != nil{
+		log.Print("Error: Pinging error to db")
+		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
+		c.AbortWithStatus(http.StatusInternalServerError)
+		return	
 	}
  
-	c.IndentedJSON(http.StatusCreated, gin.H{"Success":"Connection to DB successfull"})
+	c.IndentedJSON(http.StatusCreated, gin.H{"Success":"Connection to DB "+queryDbName+" successfull"})
+
 }
 
 func main(){
 	router := gin.Default()
 
-	router.GET("/connectDb",connectToYourDB) // just create and fill your .env
+	router.GET("/pingdb",PingYourDb) // ping db with query as db name
 
 	router.Run("localhost:8000")
 }
