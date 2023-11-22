@@ -67,6 +67,8 @@ func ExtractEnv() (DbConfig, error) {
 	return dbconfig, nil
 }
 
+// @params 1 databasename string
+// @return (*sql.DB,error)
 func OpenDbConnect(databasename string) (*sql.DB, error) {
 
 	// load .env file

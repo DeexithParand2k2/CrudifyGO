@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"net/http"
 
 	mysqlutility "github.com/DeexithParand2k2/CrudifyGO/dbwrappers/mysql"
@@ -20,13 +21,32 @@ func testPingYourDb(c *gin.Context) {
 	c.IndentedJSON(http.StatusAccepted, gin.H{"Message": status})
 }
 
+func testShowDbs(c *gin.Context) {
+
+	databases, err := mysqlutility.ShowDbs()
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"Error": err.Error()})
+		return
+	}
+
+	fmt.Println("Available Dbs", databases)
+
+	c.IndentedJSON(http.StatusAccepted, gin.H{
+		"Message":   "Received databases",
+		"databases": databases,
+	})
+
+}
+
 func main() {
 	router := gin.Default()
 
 	router.GET("/pingdb", testPingYourDb) // ping db with query as db name
-	//router.GET("/createdb",CreateYourDb) // create a db and ping it
-	//router.GET("/gettablesdb",GetTablesDb) // get tables in a db
-	//router.GET("/gettableschema",GetTableSchema) // get schema of a table
+	//router.GET("/createdb",testCreateYourDb) // create a db and ping it
+	//router.GET("/gettablesdb",testGetTablesDb) // get tables in a db
+	//router.GET("/gettableschema",testGetTableSchema) // get schema of a table
+
+	router.GET("/showdbs", testShowDbs) // list available dbs
 
 	router.Run("localhost:8000")
 }
