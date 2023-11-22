@@ -5,18 +5,18 @@ Effortlessly simplify Golang CRUD API development for multiple databases
 
 ### Table of Contents
 
-### Table of Contents
-1. [OpenDbConnect](#opendbconnect)
-2. [PingYourDb](#pingyourdb)
-3. [ListDatabases](#listdatabases)
-4. [CreateDb](#createdb)
-5. [DeleteDb](#deletedb)
+* Database Methods
+    1. [OpenDbConnect](#opendbconnect)
+    2. [PingYourDb](#pingyourdb)
+    3. [ListDatabases](#listdatabases)
+    4. [CreateDb](#createdb)
+    5. [DeleteDb](#deletedb)
+* Tabular Methods
+    1. [ListDatabases](#listdatabases)
 
 ### Methods Implementation
 
-<a name="opendbconnect"></a>
-
-
+<a name="opendbconnect"></a><br>
 1. `OpenDbConnect` : Establish Connection to a database from database connection pool
     + Parameters :
         - Name of Database (string)
@@ -33,9 +33,7 @@ Effortlessly simplify Golang CRUD API development for multiple databases
     }
     ```
 
-<a name="pingyourdb"></a>
-
-
+<a name="pingyourdb"></a><br>
 2. `PingYourDb` : Check connection to a database
     + Parameters :
         - Name of Database (string)
@@ -52,9 +50,7 @@ Effortlessly simplify Golang CRUD API development for multiple databases
     c.JSON(http.StatusCreated, gin.H{"Message":pingstatus})
     ```
 
-<a name="listdatabases"></a>
-
-
+<a name="listdatabases"></a><br>
 3. `ListDatabases` : List all databases on MySQL RDBMS
     + Parameters :
         - Nil
@@ -76,9 +72,7 @@ Effortlessly simplify Golang CRUD API development for multiple databases
     })
     ```
 
-<a name="createdb"></a>
-
-
+<a name="createdb"></a><br>
 4. `CreateDb` : Create a database in MySQL
     + Parameters :
         - databasename (string)
@@ -98,9 +92,7 @@ Effortlessly simplify Golang CRUD API development for multiple databases
     c.JSON(http.StatusCreated, gin.H{"Message": fmt.Sprintf("Created database %s successfully", database_name)})
     ```
 
-<a name="deletedb"></a>
-
-
+<a name="deletedb"></a><br>
 5. `DeleteDb` : Delete a database in MySQL
     + Parameters :
         - databasename string
