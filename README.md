@@ -16,6 +16,7 @@ Effortlessly simplify Golang CRUD API development for multiple databases
 
 * Tabular Methods
     1. [ListTablesDb](#listtablesdb)
+    2. [GetTableContent](#gettablecontent)
 
 ### Database Methods Implementation
 
@@ -124,10 +125,11 @@ Effortlessly simplify Golang CRUD API development for multiple databases
 
 <a name="listtablesdb"></a><br>
 
-1. `ListTablesDb` : Delete a database in MySQL
+1. `ListTablesDb` : List tables in a MySQL database
     + Parameters :
-        - databasename string
+        - databasename (string)
     + Return Type :
+        - table ([]string)
         - error
         
     ### Example
@@ -144,6 +146,18 @@ Effortlessly simplify Golang CRUD API development for multiple databases
         "Message":"Listed Tables Successfully",
         "Tables":tables,
     })
+    ```
+
+<a name="gettablecontent"></a> 
+
+2. `GetTableContent` : Establish Connection to a database from database connection pool
+    + Parameters :
+        - Name of Database (string)
+    + Return Type :
+        
+        
+    ### Example
+    ```
     ```
 
 ## PostgreSQL (In-Development)
