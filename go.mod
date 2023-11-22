@@ -1,4 +1,4 @@
-module dbwrapper-crud
+module github.com/DeexithParand2k2/CrudifyGO
 
 go 1.21.3
 
