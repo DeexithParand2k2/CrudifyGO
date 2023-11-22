@@ -90,9 +90,7 @@ Effortlessly simplify Golang CRUD API development for multiple databases
 	}
 
 	c.JSON(http.StatusCreated, gin.H{"Message": fmt.Sprintf("Deleted database %s successfully", database_name)})
-
-
-
+    ```
 
 ## PostgreSQL (In-Development)
 
