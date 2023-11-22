@@ -55,6 +55,45 @@ Effortlessly simplify Golang CRUD API development for multiple databases
 		"databases": databases,
 	})
 
+4. `CreateDb` : Create a database in MySQL
+    + Parameters :
+        - databasename (string)
+    + Return Type :
+        - error
+        
+    ### Example
+    ```
+    database_name := c.Query("databasename")
+
+	err := mysqlutility.CreateDb(database_name)
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"Error": err.Error()})
+		return
+	}
+
+	c.JSON(http.StatusCreated, gin.H{"Message": fmt.Sprintf("Created database %s successfully", database_name)})
+
+5. `DeleteDb` : Delete a database in MySQL
+    + Parameters :
+        - databasename string
+    + Return Type :
+        - error
+        
+    ### Example
+    ```
+    database_name := c.Query("databasename")
+
+	err := mysqlutility.DeleteDb(database_name)
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"Error": err.Error()})
+		return
+	}
+
+	c.JSON(http.StatusCreated, gin.H{"Message": fmt.Sprintf("Deleted database %s successfully", database_name)})
+
+
+
+
 ## PostgreSQL (In-Development)
 
 
