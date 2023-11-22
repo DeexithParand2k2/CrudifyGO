@@ -3,7 +3,19 @@ Effortlessly simplify Golang CRUD API development for multiple databases
 
 ## MySQL 
 
-### Methods
+### Table of Contents
+
+### Table of Contents
+1. [OpenDbConnect](#opendbconnect)
+2. [PingYourDb](#pingyourdb)
+3. [ListDatabases](#listdatabases)
+4. [CreateDb](#createdb)
+5. [DeleteDb](#deletedb)
+
+### Methods Implementation
+
+<a name="opendbconnect"></a>
+
 
 1. `OpenDbConnect` : Establish Connection to a database from database connection pool
     + Parameters :
@@ -13,13 +25,17 @@ Effortlessly simplify Golang CRUD API development for multiple databases
         - error
         
     ### Example
-    ```
+    ```go
     db,err := OpenDbConnect("databasename")
     if err!=nil{
         c.JSON(http.StatusInternalServerError, gin.H{"Error":err.Error()})
         return
     }
-    
+    ```
+
+<a name="pingyourdb"></a>
+
+
 2. `PingYourDb` : Check connection to a database
     + Parameters :
         - Name of Database (string)
@@ -28,12 +44,16 @@ Effortlessly simplify Golang CRUD API development for multiple databases
         - error
         
     ### Example
-    ```
+    ```go
     pingstatus,err := PingYourDb("databasename")
     if err!=nil{
         c.JSON(http.StatusInternalServerError, gin.H{"Error":err.Error()})
     }
     c.JSON(http.StatusCreated, gin.H{"Message":pingstatus})
+    ```
+
+<a name="listdatabases"></a>
+
 
 3. `ListDatabases` : List all databases on MySQL RDBMS
     + Parameters :
@@ -43,17 +63,21 @@ Effortlessly simplify Golang CRUD API development for multiple databases
         - error
         
     ### Example
-    ```
+    ```go
     databases, err := mysqlutility.ListDatabases()
-	if err != nil {
-		c.JSON(http.StatusInternalServerError, gin.H{"Error": err.Error()})
-		return
-	}
+    if err != nil {
+        c.JSON(http.StatusInternalServerError, gin.H{"Error": err.Error()})
+        return
+    }
 
-	c.IndentedJSON(http.StatusAccepted, gin.H{
-		"Message":   "Received databases",
-		"databases": databases,
-	})
+    c.IndentedJSON(http.StatusAccepted, gin.H{
+        "Message":   "Received databases",
+        "databases": databases,
+    })
+    ```
+
+<a name="createdb"></a>
+
 
 4. `CreateDb` : Create a database in MySQL
     + Parameters :
@@ -62,16 +86,20 @@ Effortlessly simplify Golang CRUD API development for multiple databases
         - error
         
     ### Example
-    ```
+    ```go
     database_name := c.Query("databasename")
 
-	err := mysqlutility.CreateDb(database_name)
-	if err != nil {
-		c.JSON(http.StatusInternalServerError, gin.H{"Error": err.Error()})
-		return
-	}
+    err := mysqlutility.CreateDb(database_name)
+    if err != nil {
+        c.JSON(http.StatusInternalServerError, gin.H{"Error": err.Error()})
+        return
+    }
 
-	c.JSON(http.StatusCreated, gin.H{"Message": fmt.Sprintf("Created database %s successfully", database_name)})
+    c.JSON(http.StatusCreated, gin.H{"Message": fmt.Sprintf("Created database %s successfully", database_name)})
+    ```
+
+<a name="deletedb"></a>
+
 
 5. `DeleteDb` : Delete a database in MySQL
     + Parameters :
@@ -80,19 +108,18 @@ Effortlessly simplify Golang CRUD API development for multiple databases
         - error
         
     ### Example
-    ```
+    ```go
     database_name := c.Query("databasename")
 
-	err := mysqlutility.DeleteDb(database_name)
-	if err != nil {
-		c.JSON(http.StatusInternalServerError, gin.H{"Error": err.Error()})
-		return
-	}
+    err := mysqlutility.DeleteDb(database_name)
+    if err != nil {
+        c.JSON(http.StatusInternalServerError, gin.H{"Error": err.Error()})
+        return
+    }
 
-	c.JSON(http.StatusCreated, gin.H{"Message": fmt.Sprintf("Deleted database %s successfully", database_name)})
+    c.JSON(http.StatusCreated, gin.H{"Message": fmt.Sprintf("Deleted database %s successfully", database_name)})
     ```
 
 ## PostgreSQL (In-Development)
-
 
 ## SQLite (In-Development)

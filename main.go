@@ -67,13 +67,17 @@ func testCreateDb(c *gin.Context) {
 func main() {
 	router := gin.Default()
 
-	router.GET("/pingdb", testPingYourDb) // ping db with query as db name
-	//router.GET("/gettablesdb",testGetTablesDb) // get tables in a db
-	//router.GET("/gettableschema",testGetTableSchema) // get schema of a table
+	// db operations
 
+	router.GET("/pingdb", testPingYourDb)     // ping db with query as db name
 	router.GET("/listdbs", testListDatabases) // list available dbs
 	router.GET("/createdb", testCreateDb)     // create a db and ping it
 	router.GET("/deletedb", testDeleteDb)     // delete existing db and resend present dbs
+
+	// table operations
+
+	//router.GET("/gettablesdb",testGetTablesDb) // get tables in a db
+	//router.GET("/gettableschema",testGetTableSchema) // get schema of a table
 
 	router.Run("localhost:8000")
 }
