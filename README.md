@@ -19,7 +19,8 @@ Effortlessly simplify Golang CRUD API development for multiple databases
 
 ### Database Methods Implementation
 
-<a name="opendbconnect"></a><br> 
+<a name="opendbconnect"></a> 
+
 1. `OpenDbConnect` : Establish Connection to a database from database connection pool
     + Parameters :
         - Name of Database (string)
@@ -37,6 +38,7 @@ Effortlessly simplify Golang CRUD API development for multiple databases
     ```
 
 <a name="pingyourdb"></a><br>
+
 2. `PingYourDb` : Check connection to a database
     + Parameters :
         - Name of Database (string)
@@ -54,6 +56,7 @@ Effortlessly simplify Golang CRUD API development for multiple databases
     ```
 
 <a name="listdatabases"></a><br>
+
 3. `ListDatabases` : List all databases on MySQL RDBMS
     + Parameters :
         - Nil
@@ -76,6 +79,7 @@ Effortlessly simplify Golang CRUD API development for multiple databases
     ```
 
 <a name="createdb"></a><br>
+
 4. `CreateDb` : Create a database in MySQL
     + Parameters :
         - databasename (string)
@@ -96,6 +100,7 @@ Effortlessly simplify Golang CRUD API development for multiple databases
     ```
 
 <a name="deletedb"></a><br>
+
 5. `DeleteDb` : Delete a database in MySQL
     + Parameters :
         - databasename string
@@ -117,7 +122,8 @@ Effortlessly simplify Golang CRUD API development for multiple databases
 
 ### Tabular Methods Implementation
 
-<a name="listtablesdb"></a>
+<a name="listtablesdb"></a><br>
+
 1. `ListTablesDb` : Delete a database in MySQL
     + Parameters :
         - databasename string
