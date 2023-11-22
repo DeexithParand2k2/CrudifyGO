@@ -21,7 +21,7 @@ func DeleteDb(databasename string) error {
 	}
 	defer db.Close()
 
-	_, err = db.Exec(fmt.Sprintf("create database %s", databasename))
+	_, err = db.Exec(fmt.Sprintf("drop database %s", databasename))
 	if err != nil {
 		log.Fatal("Error in executing query ", err.Error())
 		return err

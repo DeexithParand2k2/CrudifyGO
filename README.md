@@ -35,7 +35,7 @@ Effortlessly simplify Golang CRUD API development for multiple databases
     }
     c.JSON(http.StatusCreated, gin.H{"Message":pingstatus})
 
-3. `ShowDbs` : List all databases on MySQL RDBMS
+3. `ListDatabases` : List all databases on MySQL RDBMS
     + Parameters :
         - Nil
     + Return Type :
@@ -44,7 +44,7 @@ Effortlessly simplify Golang CRUD API development for multiple databases
         
     ### Example
     ```
-    databases, err := mysqlutility.ShowDbs()
+    databases, err := mysqlutility.ListDatabases()
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"Error": err.Error()})
 		return

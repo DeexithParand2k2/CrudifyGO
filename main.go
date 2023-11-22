@@ -21,9 +21,9 @@ func testPingYourDb(c *gin.Context) {
 	c.IndentedJSON(http.StatusAccepted, gin.H{"Message": status})
 }
 
-func testShowDbs(c *gin.Context) {
+func testListDatabases(c *gin.Context) {
 
-	databases, err := mysqlutility.ShowDbs()
+	databases, err := mysqlutility.ListDatabases()
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"Error": err.Error()})
 		return
@@ -71,9 +71,9 @@ func main() {
 	//router.GET("/gettablesdb",testGetTablesDb) // get tables in a db
 	//router.GET("/gettableschema",testGetTableSchema) // get schema of a table
 
-	router.GET("/showdbs", testShowDbs)   // list available dbs
-	router.GET("/createdb", testCreateDb) // create a db and ping it
-	router.GET("/deletedb", testDeleteDb) // delete existing db and resend present dbs
+	router.GET("/listdbs", testListDatabases) // list available dbs
+	router.GET("/createdb", testCreateDb)     // create a db and ping it
+	router.GET("/deletedb", testDeleteDb)     // delete existing db and resend present dbs
 
 	router.Run("localhost:8000")
 }
