@@ -8,7 +8,8 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-// testing our pingdb func
+// database methods
+
 func testPingYourDb(c *gin.Context) {
 
 	databaseNameQuery := c.Query("databasename")
@@ -64,6 +65,30 @@ func testCreateDb(c *gin.Context) {
 
 }
 
+// tabular Methods
+
+func testListTablesDb(c *gin.Context) {
+	database_name := c.Query("databasename")
+
+	tables, err := mysqlutility.ListTablesDb(database_name)
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"Error": err.Error()})
+		return
+	}
+
+	if len(tables) == 0 {
+		c.JSON(http.StatusCreated, gin.H{
+			"Message": "Listed Tables Successfully",
+			"Tables":  "Empty",
+		})
+	} else {
+		c.JSON(http.StatusCreated, gin.H{
+			"Message": "Listed Tables Successfully",
+			"Tables":  tables,
+		})
+	}
+}
+
 func main() {
 	router := gin.Default()
 
@@ -76,7 +101,7 @@ func main() {
 
 	// table operations
 
-	//router.GET("/gettablesdb",testGetTablesDb) // get tables in a db
+	router.GET("/gettablesdb", testListTablesDb) // get tables in a db
 	//router.GET("/gettableschema",testGetTableSchema) // get schema of a table
 
 	router.Run("localhost:8000")

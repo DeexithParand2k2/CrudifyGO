@@ -11,12 +11,15 @@ Effortlessly simplify Golang CRUD API development for multiple databases
     3. [ListDatabases](#listdatabases)
     4. [CreateDb](#createdb)
     5. [DeleteDb](#deletedb)
+    6. [CreateMultipleDb](#createdb) (In-Progress)
+    7. [DeleteMultipleDb](#deletedb) (In-Progress)
+
 * Tabular Methods
-    1. [ListDatabases](#listdatabases)
+    1. [ListTablesDb](#listtablesdb) (In-Progress)
 
-### Methods Implementation
+### Database Methods Implementation
 
-<a name="opendbconnect"></a><br>
+<a name="opendbconnect"></a><br> 
 1. `OpenDbConnect` : Establish Connection to a database from database connection pool
     + Parameters :
         - Name of Database (string)
@@ -110,6 +113,31 @@ Effortlessly simplify Golang CRUD API development for multiple databases
     }
 
     c.JSON(http.StatusCreated, gin.H{"Message": fmt.Sprintf("Deleted database %s successfully", database_name)})
+    ```
+
+### Tabular Methods Implementation
+
+<a name="listtablesdb"></a><br>
+5. `ListTablesDb` : Delete a database in MySQL
+    + Parameters :
+        - databasename string
+    + Return Type :
+        - error
+        
+    ### Example
+    ```go
+    database_name := c.Query("databasename")
+
+    tables, err := mysqlutility.ListTablesDb(database_name)
+    if err != nil {
+        c.JSON(http.StatusInternalServerError, gin.H{"Error": err.Error()})
+        return
+    }
+
+    c.JSON(http.StatusCreated, gin.H{
+        "Message":"Listed Tables Successfully",
+        "Tables":tables,
+    })
     ```
 
 ## PostgreSQL (In-Development)
