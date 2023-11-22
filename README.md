@@ -15,7 +15,7 @@ Effortlessly simplify Golang CRUD API development for multiple databases
     7. [DeleteMultipleDb](#deletedb) (In-Progress)
 
 * Tabular Methods
-    1. [ListTablesDb](#listtablesdb) (In-Progress)
+    1. [ListTablesDb](#listtablesdb)
 
 ### Database Methods Implementation
 
@@ -117,8 +117,8 @@ Effortlessly simplify Golang CRUD API development for multiple databases
 
 ### Tabular Methods Implementation
 
-<a name="listtablesdb"></a><br>
-5. `ListTablesDb` : Delete a database in MySQL
+<a name="listtablesdb"></a>
+1. `ListTablesDb` : Delete a database in MySQL
     + Parameters :
         - databasename string
     + Return Type :

@@ -101,8 +101,7 @@ func main() {
 
 	// table operations
 
-	router.GET("/gettablesdb", testListTablesDb) // get tables in a db
-	//router.GET("/gettableschema",testGetTableSchema) // get schema of a table
+	router.GET("/listtablesdb", testListTablesDb) // get tables in a db
 
 	router.Run("localhost:8000")
 }
