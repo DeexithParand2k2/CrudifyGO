@@ -2,6 +2,7 @@ package mysqlutility
 
 import "log"
 
+// @return (databases,error) ([]string,error)
 func ShowDbs() ([]string, error) {
 
 	var databases []string // store and return all dbs in an slice

@@ -1,7 +1,6 @@
 package main
 
 import (
-	"fmt"
 	"net/http"
 
 	mysqlutility "github.com/DeexithParand2k2/CrudifyGO/dbwrappers/mysql"
@@ -28,8 +27,6 @@ func testShowDbs(c *gin.Context) {
 		c.JSON(http.StatusInternalServerError, gin.H{"Error": err.Error()})
 		return
 	}
-
-	fmt.Println("Available Dbs", databases)
 
 	c.IndentedJSON(http.StatusAccepted, gin.H{
 		"Message":   "Received databases",

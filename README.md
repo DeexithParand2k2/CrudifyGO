@@ -34,7 +34,26 @@ Effortlessly simplify Golang CRUD API development for multiple databases
         c.JSON(http.StatusInternalServerError, gin.H{"Error":err.Error()})
     }
     c.JSON(http.StatusCreated, gin.H{"Message":pingstatus})
-    
+
+3. `ShowDbs` : List all databases on MySQL RDBMS
+    + Parameters :
+        - Nil
+    + Return Type :
+        - array of present databases
+        - error
+        
+    ### Example
+    ```
+    databases, err := mysqlutility.ShowDbs()
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"Error": err.Error()})
+		return
+	}
+
+	c.IndentedJSON(http.StatusAccepted, gin.H{
+		"Message":   "Received databases",
+		"databases": databases,
+	})
 
 ## PostgreSQL (In-Development)
 
