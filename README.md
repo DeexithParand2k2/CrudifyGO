@@ -153,8 +153,9 @@ Effortlessly simplify Golang CRUD API development for multiple databases
 2. `GetTableContent` : Establish Connection to a database from database connection pool
     + Parameters :
         - Name of Database (string)
+        - Name of table (string)
     + Return Type :
-        
+        - 2d Array (strings)
         
     ### Example
     ```
