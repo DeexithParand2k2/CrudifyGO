@@ -89,6 +89,23 @@ func testListTablesDb(c *gin.Context) {
 	}
 }
 
+func testGetTableContent(c *gin.Context) {
+
+	database_name := c.Query("databasename")
+
+	data, err := mysqlutility.GetTableContent(database_name)
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"Error": err.Error()})
+		return
+	}
+
+	c.JSON(http.StatusInternalServerError, gin.H{
+		"Message":         "Returned table content",
+		"Tabular Content": data,
+	})
+
+}
+
 func main() {
 	router := gin.Default()
 
@@ -101,8 +118,8 @@ func main() {
 
 	// table operations
 
-	router.GET("/listtablesdb", testListTablesDb) // get tables in a db
-	//router.GET("/gettablecontent", testGetTableContent) // get table content
+	router.GET("/listtablesdb", testListTablesDb)       // get tables in a db
+	router.GET("/gettablecontent", testGetTableContent) // get table content
 
 	router.Run("localhost:8000")
 }
