@@ -11,8 +11,8 @@ Effortlessly simplify Golang CRUD API development for multiple databases
     3. [ListDatabases](#listdatabases)
     4. [CreateDb](#createdb)
     5. [DeleteDb](#deletedb)
-    6. [CreateMultipleDb](#createdb) (In-Progress)
-    7. [DeleteMultipleDb](#deletedb) (In-Progress)
+    6. [CreateMultipleDb](#createmultipledb) (In-Progress)
+    7. [DeleteMultipleDb](#deletemultipledb) (In-Progress)
 
 * Tabular Methods
     1. [ListTablesDb](#listtablesdb)
