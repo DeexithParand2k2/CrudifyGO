@@ -89,17 +89,19 @@ func testListTablesDb(c *gin.Context) {
 	}
 }
 
+// 2 queries available
 func testGetTableContent(c *gin.Context) {
 
 	database_name := c.Query("databasename")
+	table_name := c.Query("tablename")
 
-	data, err := mysqlutility.GetTableContent(database_name)
+	data, err := mysqlutility.GetTableContent(database_name, table_name)
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"Error": err.Error()})
 		return
 	}
 
-	c.JSON(http.StatusInternalServerError, gin.H{
+	c.IndentedJSON(http.StatusInternalServerError, gin.H{
 		"Message":         "Returned table content",
 		"Tabular Content": data,
 	})
