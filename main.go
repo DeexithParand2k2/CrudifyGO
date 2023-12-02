@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"net/http"
 
-	mysqlutility "github.com/DeexithParand2k2/CrudifyGO/dbwrappers/mysql"
+	mysqlutil "github.com/DeexithParand2k2/CrudifyGO/dbwrappers/mysql"
 	"github.com/gin-gonic/gin"
 )
 
@@ -13,7 +13,7 @@ import (
 func testPingYourDb(c *gin.Context) {
 
 	databaseNameQuery := c.Query("databasename")
-	status, err := mysqlutility.PingYourDb(databaseNameQuery)
+	status, err := mysqlutil.PingYourDb(databaseNameQuery)
 	if err != nil {
 		c.IndentedJSON(http.StatusInternalServerError, gin.H{"Error": err.Error()})
 		return
@@ -24,7 +24,7 @@ func testPingYourDb(c *gin.Context) {
 
 func testListDatabases(c *gin.Context) {
 
-	databases, err := mysqlutility.ListDatabases()
+	databases, err := mysqlutil.ListDatabases()
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"Error": err.Error()})
 		return
@@ -41,7 +41,7 @@ func testDeleteDb(c *gin.Context) {
 
 	database_name := c.Query("databasename")
 
-	err := mysqlutility.DeleteDb(database_name)
+	err := mysqlutil.DeleteDb(database_name)
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"Error": err.Error()})
 		return
@@ -55,7 +55,7 @@ func testCreateDb(c *gin.Context) {
 
 	database_name := c.Query("databasename")
 
-	err := mysqlutility.CreateDb(database_name)
+	err := mysqlutil.CreateDb(database_name)
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"Error": err.Error()})
 		return
@@ -70,7 +70,7 @@ func testCreateDb(c *gin.Context) {
 func testListTablesDb(c *gin.Context) {
 	database_name := c.Query("databasename")
 
-	tables, err := mysqlutility.ListTablesDb(database_name)
+	tables, err := mysqlutil.ListTablesDb(database_name)
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"Error": err.Error()})
 		return
@@ -95,7 +95,7 @@ func testGetTableContent(c *gin.Context) {
 	database_name := c.Query("databasename")
 	table_name := c.Query("tablename")
 
-	data, err := mysqlutility.GetTableContent(database_name, table_name)
+	data, err := mysqlutil.GetTableContent(database_name, table_name)
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"Error": err.Error()})
 		return

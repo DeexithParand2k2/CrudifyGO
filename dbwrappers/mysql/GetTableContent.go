@@ -1,19 +1,23 @@
-package mysqlutility
+package mysqlutil
 
 import (
 	"fmt"
 	"log"
 )
 
+/*
+* @param databasename (string)
+* @param tablename (string)
+* @return tablecontent ([][]string)
+ */
 func GetTableContent(databasename string, tablename string) ([][]string, error) {
-
-	//results := [][]string{}
 
 	db, err := OpenDbConnect(databasename)
 	if err != nil {
 		log.Print("Error opening db")
 		return [][]string{}, err
 	}
+	defer db.Close()
 
 	// check if connection to table is live
 	rows, err := db.Query(fmt.Sprintf("SELECT * FROM %s", tablename))

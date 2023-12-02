@@ -1,4 +1,4 @@
-package mysqlutility
+package mysqlutil
 
 import (
 	"errors"

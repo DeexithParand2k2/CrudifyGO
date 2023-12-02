@@ -1,4 +1,4 @@
-package mysqlutility
+package mysqlutil
 
 // @params 1 databasename string
 // @return (string,error)

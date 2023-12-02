@@ -1,4 +1,4 @@
-package mysqlutility
+package mysqlutil
 
 import (
 	"database/sql"
@@ -99,6 +99,10 @@ func OpenDbConnect(databasename string) (*sql.DB, error) {
 		log.Print(connectionString)
 		return db, err
 	}
+
+	// Set parameters for the connection pool
+	db.SetMaxOpenConns(10) // Adjust as needed
+	db.SetMaxIdleConns(5)  // Adjust as needed
 
 	return db, nil
 }

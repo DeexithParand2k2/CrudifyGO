@@ -67,7 +67,7 @@ Effortlessly simplify Golang CRUD API development for multiple databases
         
     ### Example
     ```go
-    databases, err := mysqlutility.ListDatabases()
+    databases, err := mysqlutil.ListDatabases()
     if err != nil {
         c.JSON(http.StatusInternalServerError, gin.H{"Error": err.Error()})
         return
@@ -91,7 +91,7 @@ Effortlessly simplify Golang CRUD API development for multiple databases
     ```go
     database_name := c.Query("databasename")
 
-    err := mysqlutility.CreateDb(database_name)
+    err := mysqlutil.CreateDb(database_name)
     if err != nil {
         c.JSON(http.StatusInternalServerError, gin.H{"Error": err.Error()})
         return
@@ -112,7 +112,7 @@ Effortlessly simplify Golang CRUD API development for multiple databases
     ```go
     database_name := c.Query("databasename")
 
-    err := mysqlutility.DeleteDb(database_name)
+    err := mysqlutil.DeleteDb(database_name)
     if err != nil {
         c.JSON(http.StatusInternalServerError, gin.H{"Error": err.Error()})
         return
@@ -136,7 +136,7 @@ Effortlessly simplify Golang CRUD API development for multiple databases
     ```go
     database_name := c.Query("databasename")
 
-    tables, err := mysqlutility.ListTablesDb(database_name)
+    tables, err := mysqlutil.ListTablesDb(database_name)
     if err != nil {
         c.JSON(http.StatusInternalServerError, gin.H{"Error": err.Error()})
         return
