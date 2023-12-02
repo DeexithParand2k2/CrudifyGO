@@ -3,43 +3,62 @@ package mysqlutil
 import (
 	"fmt"
 	"log"
+	r "reflect"
 )
 
 /*
 * @param databasename (string)
 * @param tablename (string)
-* @return tablecontent ([][]string)
+* @return (error)
  */
-func GetTableContent(databasename string, tablename string) ([][]string, error) {
+func GetTableContent(databasename string, tablename string, tableStore interface{}) error {
 
 	db, err := OpenDbConnect(databasename)
 	if err != nil {
 		log.Print("Error opening db")
-		return [][]string{}, err
+		return err
 	}
 	defer db.Close()
 
-	// check if connection to table is live
+	// get content based on query
 	rows, err := db.Query(fmt.Sprintf("SELECT * FROM %s", tablename))
 	if err != nil {
 		log.Print("Error retrieving data from db")
-		return [][]string{}, err
+		return err
 	}
 	defer rows.Close()
 
-	columns, err := rows.Columns()
-	if err != nil {
-		log.Print("Not able to get columns")
-		return [][]string{}, err
+	tableType := r.TypeOf(tableStore).Elem().Elem() // type of passed array
+
+	tableSlice := r.MakeSlice(r.SliceOf(tableType), 0, 0) // slice to store obj of this type
+
+	for rows.Next() {
+
+		tableObj := r.New(tableType).Elem()
+
+		fields := make([]interface{}, tableObj.NumField())
+		for i := 0; i < tableObj.NumField(); i++ {
+			field := tableObj.Field(i)
+			if field.CanInterface() {
+				fields[i] = field.Addr().Interface()
+			}
+		}
+
+		if err := rows.Scan(fields...); err != nil {
+			return err
+		}
+
+		tableSlice = r.Append(tableSlice, tableObj)
+
 	}
 
-	for index, val := range columns {
-		fmt.Println("Columns", index, ":", val)
+	fmt.Println("here is the slice", tableSlice)
+
+	if r.ValueOf(tableStore).Kind() == r.Ptr {
+		r.ValueOf(tableStore).Elem().Set(tableSlice)
+	} else {
+		return fmt.Errorf("tableStore must be a pointer to a slice")
 	}
 
-	fmt.Println("Length", len(columns))
-
-	//fmt.Println("Output #######", rows)
-
-	return [][]string{}, nil
+	return nil
 }

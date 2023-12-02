@@ -89,21 +89,33 @@ func testListTablesDb(c *gin.Context) {
 	}
 }
 
-// 2 queries available
+type customer struct {
+	Cid   int    `json:"cid"`
+	Fname string `json:"fname"`
+	Lname string `json:"lname"`
+	Total int    `json:"total"`
+}
+
+/*
+* 2 queries available
+* pass the object of table content you need
+ */
 func testGetTableContent(c *gin.Context) {
 
 	database_name := c.Query("databasename")
 	table_name := c.Query("tablename")
 
-	data, err := mysqlutil.GetTableContent(database_name, table_name)
+	var custTable []customer
+
+	err := mysqlutil.GetTableContent(database_name, table_name, &custTable)
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"Error": err.Error()})
 		return
 	}
 
 	c.IndentedJSON(http.StatusInternalServerError, gin.H{
-		"Message":         "Returned table content",
-		"Tabular Content": data,
+		"Message":       "Returned table content",
+		"Table Content": custTable,
 	})
 
 }
