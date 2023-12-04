@@ -153,8 +153,8 @@ Effortlessly simplify Golang CRUD API development for multiple databases.
 2. `GetTableContent` : Get all content from a table in DB
     + Parameters :
         - Name of Database (string)
-        - Name of table (string)
-        - 
+        - Name of Table (string)
+        - Empty structure object to store table data (struct obj)
     + Return Type :
         - error
         
