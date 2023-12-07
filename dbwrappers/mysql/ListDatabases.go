@@ -1,6 +1,8 @@
 package mysqlutil
 
-import "log"
+import (
+	"log"
+)
 
 // @return (databases,error) ([]string,error)
 func ListDatabases() ([]string, error) {

@@ -5,6 +5,7 @@ import (
 	"net/http"
 
 	mysqlutil "github.com/DeexithParand2k2/CrudifyGO/dbwrappers/mysql"
+	mysqltable "github.com/DeexithParand2k2/CrudifyGO/dbwrappers/mysql/tablemethods"
 	"github.com/gin-gonic/gin"
 )
 
@@ -70,7 +71,7 @@ func testCreateDb(c *gin.Context) {
 func testListTablesDb(c *gin.Context) {
 	database_name := c.Query("databasename")
 
-	tables, err := mysqlutil.ListTablesDb(database_name)
+	tables, err := mysqltable.ListTablesDb(database_name)
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"Error": err.Error()})
 		return
