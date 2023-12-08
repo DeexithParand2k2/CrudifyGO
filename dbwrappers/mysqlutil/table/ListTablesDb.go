@@ -1,16 +1,16 @@
-package mysqlutil
+package table
 
 import (
 	"log"
 
-	mysqlutil "github.com/DeexithParand2k2/CrudifyGO/dbwrappers/mysql"
+	"github.com/DeexithParand2k2/CrudifyGO/dbwrappers/mysqlutil/config"
 )
 
 func ListTablesDb(databasename string) ([]string, error) {
 
 	var tables []string
 
-	db, err := mysqlutil.OpenDbConnect(databasename)
+	db, err := config.OpenDbConnect(databasename)
 	if err != nil {
 		log.Print("Error opening db", err)
 		return tables, err

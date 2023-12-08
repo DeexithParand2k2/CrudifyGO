@@ -1,9 +1,11 @@
 package mysqlutil
 
+import "github.com/DeexithParand2k2/CrudifyGO/dbwrappers/mysqlutil/config"
+
 // @params 1 databasename string
 // @return (string,error)
 func PingYourDb(databaseName string) (string, error) {
-	db, err := OpenDbConnect(databaseName) // returns
+	db, err := config.OpenDbConnect(databaseName) // returns
 	if err != nil {
 		return "", err
 	}

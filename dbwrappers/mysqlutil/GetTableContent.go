@@ -4,6 +4,8 @@ import (
 	"fmt"
 	"log"
 	r "reflect"
+
+	"github.com/DeexithParand2k2/CrudifyGO/dbwrappers/mysqlutil/config"
 )
 
 /*
@@ -13,7 +15,7 @@ import (
  */
 func GetTableContent(databasename string, tablename string, tableStore interface{}) error {
 
-	db, err := OpenDbConnect(databasename)
+	db, err := config.OpenDbConnect(databasename)
 	if err != nil {
 		log.Print("Error opening db")
 		return err

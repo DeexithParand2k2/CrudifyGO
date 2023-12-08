@@ -2,6 +2,8 @@ package mysqlutil
 
 import (
 	"log"
+
+	"github.com/DeexithParand2k2/CrudifyGO/dbwrappers/mysqlutil/config"
 )
 
 // @return (databases,error) ([]string,error)
@@ -9,7 +11,7 @@ func ListDatabases() ([]string, error) {
 
 	var databases []string // store and return all dbs in an slice
 
-	db, err := OpenDbConnect("information_schema")
+	db, err := config.OpenDbConnect("information_schema")
 	if err != nil {
 		log.Fatal("Error opening database connection:", err)
 		return databases, err
