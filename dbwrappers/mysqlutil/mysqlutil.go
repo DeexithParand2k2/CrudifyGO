@@ -12,3 +12,7 @@ func ListTablesDb(databasename string) ([]string, error) {
 func CreateDb(databasename string) error {
 	return db.CreateDb(databasename)
 }
+
+func DeleteDb(databasename string) error {
+	return db.DeleteDb(databasename)
+}
