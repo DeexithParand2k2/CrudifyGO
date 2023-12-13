@@ -16,3 +16,7 @@ func CreateDb(databasename string) error {
 func DeleteDb(databasename string) error {
 	return db.DeleteDb(databasename)
 }
+
+func GetTableContent(databasename string, tablename string, tableStore interface{}) error {
+	return table.GetTableContent(databasename, tablename, tableStore)
+}
