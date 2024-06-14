@@ -6,7 +6,7 @@ import (
 
 	"github.com/gin-gonic/gin"
 
-	mysqlutil "github.com/DeexithParand2k2/CrudifyGO/dbwrappers/mysqlutil"
+	mysql "github.com/DeexithParand2k2/CrudifyGO/dbwrappers/mysql"
 )
 
 // database methods
@@ -14,7 +14,7 @@ import (
 func testPingYourDb(c *gin.Context) {
 
 	databaseNameQuery := c.Query("databasename")
-	status, err := mysqlutil.PingYourDb(databaseNameQuery)
+	status, err := mysql.PingYourDb(databaseNameQuery)
 	if err != nil {
 		c.IndentedJSON(http.StatusInternalServerError, gin.H{"Error": err.Error()})
 		return
@@ -25,7 +25,7 @@ func testPingYourDb(c *gin.Context) {
 
 func testListDatabases(c *gin.Context) {
 
-	databases, err := mysqlutil.ListDatabases()
+	databases, err := mysql.ListDatabases()
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"Error": err.Error()})
 		return
@@ -42,7 +42,7 @@ func testDeleteDb(c *gin.Context) {
 
 	database_name := c.Query("databasename")
 
-	err := mysqlutil.DeleteDb(database_name)
+	err := mysql.DeleteDb(database_name)
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"Error": err.Error()})
 		return
@@ -56,7 +56,7 @@ func testCreateDb(c *gin.Context) {
 
 	database_name := c.Query("databasename")
 
-	err := mysqlutil.CreateDb(database_name)
+	err := mysql.CreateDb(database_name)
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"Error": err.Error()})
 		return
@@ -71,7 +71,7 @@ func testCreateDb(c *gin.Context) {
 func testListTablesDb(c *gin.Context) {
 	database_name := c.Query("databasename")
 
-	tables, err := mysqlutil.ListTablesDb(database_name)
+	tables, err := mysql.ListTablesDb(database_name)
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"Error": err.Error()})
 		return
@@ -108,7 +108,7 @@ func testGetTableContent(c *gin.Context) {
 
 	var custTable []customer
 
-	err := mysqlutil.GetTableContent(database_name, table_name, &custTable)
+	err := mysql.GetTableContent(database_name, table_name, &custTable)
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"Error": err.Error()})
 		return

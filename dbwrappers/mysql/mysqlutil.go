@@ -1,8 +1,8 @@
-package mysqlutil
+package mysql
 
 import (
-	"github.com/DeexithParand2k2/CrudifyGO/dbwrappers/mysqlutil/db"
-	"github.com/DeexithParand2k2/CrudifyGO/dbwrappers/mysqlutil/table"
+	"github.com/DeexithParand2k2/CrudifyGO/dbwrappers/mysql/db"
+	"github.com/DeexithParand2k2/CrudifyGO/dbwrappers/mysql/table"
 )
 
 func ListTablesDb(databasename string) ([]string, error) {

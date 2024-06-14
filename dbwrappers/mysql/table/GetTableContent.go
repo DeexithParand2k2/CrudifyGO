@@ -5,7 +5,7 @@ import (
 	"log"
 	r "reflect"
 
-	"github.com/DeexithParand2k2/CrudifyGO/dbwrappers/mysqlutil/config"
+	"github.com/DeexithParand2k2/CrudifyGO/dbwrappers/mysql/config"
 )
 
 /*

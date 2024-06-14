@@ -3,7 +3,7 @@ package table
 import (
 	"log"
 
-	"github.com/DeexithParand2k2/CrudifyGO/dbwrappers/mysqlutil/config"
+	"github.com/DeexithParand2k2/CrudifyGO/dbwrappers/mysql/config"
 )
 
 func ListTablesDb(databasename string) ([]string, error) {

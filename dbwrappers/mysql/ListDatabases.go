@@ -1,9 +1,9 @@
-package mysqlutil
+package mysql
 
 import (
 	"log"
 
-	"github.com/DeexithParand2k2/CrudifyGO/dbwrappers/mysqlutil/config"
+	"github.com/DeexithParand2k2/CrudifyGO/dbwrappers/mysql/config"
 )
 
 // @return (databases,error) ([]string,error)

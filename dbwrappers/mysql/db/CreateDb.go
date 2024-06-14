@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"log"
 
-	"github.com/DeexithParand2k2/CrudifyGO/dbwrappers/mysqlutil/config"
+	"github.com/DeexithParand2k2/CrudifyGO/dbwrappers/mysql/config"
 )
 
 // @params databasename (string)

@@ -1,6 +1,6 @@
-package mysqlutil
+package mysql
 
-import "github.com/DeexithParand2k2/CrudifyGO/dbwrappers/mysqlutil/config"
+import "github.com/DeexithParand2k2/CrudifyGO/dbwrappers/mysql/config"
 
 // @params 1 databasename string
 // @return (string,error)
